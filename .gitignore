@@ -1,1 +1,4 @@
 /.idea/
+/basic-eureka/target/
+/basic-order/target/
+/basic-user/target/
