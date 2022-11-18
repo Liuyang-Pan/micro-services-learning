@@ -1,0 +1,13 @@
+#bootstrap.xml服务启动是本配置会最先加载
+server:
+  port: 8081
+spring:
+  application:
+    name: basic-order
+  profiles:
+    active: dev #开发环境配置
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      config:
+        file-extension: yaml #指定文件后缀名 服务启动先读取此配置，然后从Nacos中读取basic-order-dev.yaml配置，最后再读取application.yml配置

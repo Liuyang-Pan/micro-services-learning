@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: basic-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.101.88:3306/micro_learning_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: pan19991209
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848
+#      discovery:
+#        cluster-name: Chengdu #集群名称 定义为成都 当Ribbon配置为NacosRule时会优先访问同一个集群的服务
+#        namespace: 85e8b316-f734-4bb7-9fb9-82f0fd3ac685 #命名空间 配置需要选择ID,非同一个命名空间无法远程调用
+#eureka:
+#  client:
+#    service-url: # basic-order服务地址
+#      defaultZone: http://127.0.0.1:12999/eureka
+logging:
+  level:
+    org.example: debug
+basic-order:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule #负载均衡规则NacosRule（Nacos的负载均衡规则)
+ribbon:
+  eager-load:
+    enabled: true # 开启ribbon的饥饿加载 默认值为false，即懒加载，第一次使用时才开始创建，所以会出现第一次请求较慢的情况
+    clients: basic-order # 指定开启饥饿加载的服务名
