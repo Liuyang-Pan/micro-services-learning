@@ -1,12 +1,14 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.clients.UserClient;
 import org.example.config.PatternProperties;
 import org.example.entity.OrderInfo;
 import org.example.entity.ReturnOrder;
 import org.example.entity.User;
 import org.example.service.OrderService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,12 +41,17 @@ public class OrderController {
 
     private final PatternProperties patternProperties;
 
+    @Autowired
+    private UserClient userClient;
+
     @GetMapping("/getOrder/{id}")
     public ReturnOrder getOrder(@PathVariable String id) {
         OrderInfo orderInfo = orderService.getBaseMapper().selectById(id);
-        String url = "http://basic-user/user/getUser/" + orderInfo.getUserId();
         //采用RestTemplate调用远程服务
-        User forObject = restTemplate.getForObject(url, User.class);
+//        String url = "http://basic-user/user/getUser/" + orderInfo.getUserId();
+//        User forObject = restTemplate.getForObject(url, User.class);
+        //采用OpenFeign调用远程服务
+        User forObject = userClient.findById(String.valueOf(orderInfo.getUserId()));
         ReturnOrder target = new ReturnOrder();
         target.setUser(forObject);
         BeanUtils.copyProperties(orderInfo, target);

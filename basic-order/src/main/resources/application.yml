@@ -8,6 +8,15 @@ spring:
     url: jdbc:mysql://192.168.101.88:3306/micro_learning_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: pan19991209
+    hikari:
+      auto-commit: true
+      pool-name: MyHikariCP
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 90000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
 #  cloud:
 #    nacos:
 #      server-addr: localhost:8848

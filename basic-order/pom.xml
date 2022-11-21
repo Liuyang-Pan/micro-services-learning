@@ -33,6 +33,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
+        <!-- spring-cloud-starter-openfeign 远程调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!-- MyBatis-Plus 依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>
