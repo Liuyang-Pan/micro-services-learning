@@ -12,6 +12,8 @@
         <module>basic-user</module>
         <module>basic-order</module>
         <module>basic-eureka</module>
+        <module>basic-feign-api</module>
+        <module>basic-gateway</module>
     </modules>
 
     <properties>

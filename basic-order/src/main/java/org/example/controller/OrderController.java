@@ -1,14 +1,13 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.clients.UserClient;
 import org.example.config.PatternProperties;
 import org.example.entity.OrderInfo;
 import org.example.entity.ReturnOrder;
-import org.example.entity.User;
 import org.example.service.OrderService;
+import org.feign.clients.UserClient;
+import org.feign.entity.User;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +40,7 @@ public class OrderController {
 
     private final PatternProperties patternProperties;
 
-    @Autowired
-    private UserClient userClient;
+    private final UserClient userClient;
 
     @GetMapping("/getOrder/{id}")
     public ReturnOrder getOrder(@PathVariable String id) {

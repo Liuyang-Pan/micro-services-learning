@@ -1,0 +1,24 @@
+server:
+  port: 10010
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: basic-gateway
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: basic-user # 路由ID，自定义，唯一即可
+          uri: lb://basic-user #路由目标地址，lb负载均衡简写，后面跟服务名称；也可以http://127.0.0.1:8081跟固定地址
+          predicates: # 路由断言:判断请求要符合某种规则 断言规则较多
+            - Path=/user/** # 路径匹配，请求路径以/user/开头则符合断言规则
+          filters: # 过滤器
+            - AddRequestHeader=Customize,Customize AddRequestHeader # 添加请求头 Customize=Custom AddRequestHeader
+        - id: basic-order
+          uri: lb://basic-order
+          predicates:
+            - Path=/order/**
+      default-filters: # 全局过滤器
+        - AddRequestHeader=Customize,Customize AddRequestHeader # 添加请求头 Customize=Custom AddRequestHeader

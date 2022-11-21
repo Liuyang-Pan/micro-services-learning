@@ -1,7 +1,7 @@
 package org.example;
 
-import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.RandomRule;
+import org.feign.clients.UserClient;
+import org.feign.config.FeignConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -9,7 +9,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@EnableFeignClients
+/**
+ * clients basePackages basePackageClasses可以指定当Feign包名不一致时引用指定的包下面的Client加载到Spring容器中
+ */
+@EnableFeignClients(defaultConfiguration = FeignConfiguration.class, basePackages = "org.feign.clients")
 @SpringBootApplication
 public class BasicOrderApplication {
     public static void main(String[] args) {

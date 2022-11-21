@@ -1,8 +1,4 @@
-package org.example.entity;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+package org.feign.entity;
 
 import java.io.Serializable;
 
@@ -10,12 +6,10 @@ import java.io.Serializable;
  * 
  * @TableName user
  */
-@TableName(value ="user")
 public class User implements Serializable {
     /**
      * 主键ID
      */
-    @TableId
     private Integer id;
 
     /**
@@ -28,7 +22,6 @@ public class User implements Serializable {
      */
     private String password;
 
-    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
     /**

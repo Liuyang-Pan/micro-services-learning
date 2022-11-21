@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import lombok.Data;
+import org.feign.entity.User;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

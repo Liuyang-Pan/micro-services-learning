@@ -1,6 +1,6 @@
-package org.example.clients;
+package org.feign.clients;
 
-import org.example.entity.User;
+import org.feign.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("basic-user")
 public interface UserClient {
 
-    @GetMapping("/user/getUser//{id}")
+    @GetMapping("/user/getUser/{id}")
     User findById(@PathVariable(value = "id") String id);
 }
