@@ -7,13 +7,13 @@ import org.example.entity.ReturnOrder;
 import org.example.service.OrderService;
 import org.feign.clients.UserClient;
 import org.feign.entity.User;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -42,6 +42,13 @@ public class OrderController {
 
     private final UserClient userClient;
 
+    /**
+     * 注入RabbitTemplate
+     */
+    private final RabbitTemplate rabbitTemplate;
+
+    private final RabbitAdmin rabbitAdmin;
+
     @GetMapping("/getOrder/{id}")
     public ReturnOrder getOrder(@PathVariable String id) {
         OrderInfo orderInfo = orderService.getBaseMapper().selectById(id);
@@ -59,5 +66,14 @@ public class OrderController {
     @GetMapping("/now")
     public String getNow() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(patternProperties.getDateformat()));
+    }
+
+    @GetMapping("mqProducer")
+    public String producer(@RequestParam("message") String message) {
+        //创建简单队列
+        rabbitAdmin.declareQueue(new Queue("simple.queue"));
+        //简单队列生产消息
+        rabbitTemplate.convertAndSend("simple.queue", message);
+        return "消息生产成功";
     }
 }

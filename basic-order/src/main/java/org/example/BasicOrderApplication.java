@@ -2,6 +2,8 @@ package org.example;
 
 import org.feign.clients.UserClient;
 import org.feign.config.FeignConfiguration;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -29,6 +31,16 @@ public class BasicOrderApplication {
     @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    /**
+     * 指定RabbitMQ的序列化工具
+     *
+     * @return Jackson2JsonMessageConverter
+     */
+    @Bean
+    public MessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 
     /**

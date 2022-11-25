@@ -9,6 +9,22 @@ spring:
     nacos:
       server-addr: localhost:8848
     gateway:
+      globalcors: # CORS跨域处理
+        add-to-simple-url-handler-mapping: true # option请求拦截问题
+        cors-configurations:
+          '[**]': # 拦截哪些请求
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:8090"
+              - "http://www.ces.com"
+            allowedMethods: # 允许跨域的Ajax的请求方式
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE"
+              - "OPTIONS"
+            allowedHeaders: "*" #允许在请求中携带头信息
+            allowCredentials: true # 允许携带Cookie
+            maxAge: 360000 # 跨域检测有效期
       routes:
         - id: basic-user # 路由ID，自定义，唯一即可
           uri: lb://basic-user #路由目标地址，lb负载均衡简写，后面跟服务名称；也可以http://127.0.0.1:8081跟固定地址

@@ -17,6 +17,12 @@ spring:
       max-lifetime: 90000
       connection-timeout: 10000
       connection-test-query: SELECT 1
+  rabbitmq:
+    host: 192.168.101.88
+    port: 5672
+    virtual-host: /
+    username: admin
+    password: 123456
 #  cloud:
 #    nacos:
 #      server-addr: localhost:8848

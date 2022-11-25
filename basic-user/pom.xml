@@ -38,6 +38,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!-- Spring AMQP 包含了RabbitMQ的操作 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!-- MyBatis-Plus 依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>
