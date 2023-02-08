@@ -14,6 +14,7 @@
         <module>basic-eureka</module>
         <module>basic-feign-api</module>
         <module>basic-gateway</module>
+        <module>base-elasticsearch</module>
     </modules>
 
     <properties>
@@ -28,6 +29,7 @@
         <lombok.version>1.18.24</lombok.version>
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
         <junit.version>5.9.1</junit.version>
+        <elasticsearch.version>7.17.6</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +82,31 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <!-- 替换Spring Boot的ElasticSearch版本管理 -->
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <!-- elasticsearch Java Client 新版的操作API https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
+            <dependency>
+                <groupId>co.elastic.clients</groupId>
+                <artifactId>elasticsearch-java</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
             <!-- Junit单元测试 https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
             <dependency>
